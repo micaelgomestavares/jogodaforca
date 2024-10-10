@@ -150,7 +150,7 @@ public class Palavra extends ObjetoDominioImpl {
  
     public int getTamanho() {
 
-        return letras.length();
+        return this.letras.length;
     }
 
     @Override
