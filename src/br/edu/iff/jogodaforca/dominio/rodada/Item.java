@@ -1,1 +1,1 @@
-package br.edu.iff.dominio.rodada;
+package br.edu.iff.jogodaforca.dominio.rodada;
