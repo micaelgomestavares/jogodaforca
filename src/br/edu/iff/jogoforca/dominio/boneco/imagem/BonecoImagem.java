@@ -1,6 +1,6 @@
-package br.edu.iff.jogodaforca.dominio.boneco.imagem;
+package br.edu.iff.jogoforca.dominio.boneco.imagem;
 
-import br.edu.iff.jogodaforca.dominio.boneco.Boneco;
+import br.edu.iff.jogoforca.dominio.boneco.Boneco;
 
 public class BonecoImagem implements Boneco {
 
