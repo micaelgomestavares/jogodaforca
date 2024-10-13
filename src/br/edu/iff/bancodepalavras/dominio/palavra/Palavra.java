@@ -2,25 +2,25 @@ package br.edu.iff.bancodepalavras.dominio.palavra;
 
 import java.util.Arrays;
 
+import br.edu.iff.bancodepalavras.dominio.letra.Letra;
+import br.edu.iff.bancodepalavras.dominio.letra.LetraFactory;
 import br.edu.iff.dominio.ObjetoDominioImpl;
 
 public class Palavra extends ObjetoDominioImpl {
    
     private long id;
     private Tema tema;
-    private LetraFactory letraFactory;
+    private static LetraFactory letraFactory;
     private Letra encoberta;
     private Letra[] letras;
  
  
     public static void setLetraFactory(LetraFactory factory) {
-       
-        this.letraFactory = factory;
+       letraFactory = factory;
     }
   
     public static LetraFactory getLetraFactory() {
-       
-        return this.letraFactory;
+        return letraFactory;
     }
 
 
