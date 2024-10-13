@@ -1,4 +1,4 @@
-package br.edu.iff.jogodaforca.dominio.boneco;
+package br.edu.iff.jogoforca.dominio.boneco;
 
 public interface Boneco {
 

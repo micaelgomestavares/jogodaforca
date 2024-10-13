@@ -1,6 +1,6 @@
-package br.edu.iff.jogodaforca.dominio.boneco.texto;
+package br.edu.iff.jogoforca.dominio.boneco.texto;
 
-import br.edu.iff.jogodaforca.dominio.boneco.Boneco;
+import br.edu.iff.jogoforca.dominio.boneco.Boneco;
 
 public class BonecoTexto implements Boneco {
 
@@ -57,7 +57,7 @@ public class BonecoTexto implements Boneco {
 					"cabeça, olho esquerdo, olho direito, nariz, boca, tronco, braço esquerdo, braço direito, perna esquerda, perna direita");
 			break;
 		default:
-			throw new RuntimeException("Valor invádio passado para exibir o boneco");
+			throw new IllegalArgumentException("Valor inválido para a parte do boneco.");
 		}
 	}
 }
