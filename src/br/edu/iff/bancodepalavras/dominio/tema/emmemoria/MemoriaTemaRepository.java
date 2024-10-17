@@ -10,7 +10,6 @@ import java.util.List;
 
 public class MemoriaTemaRepository implements TemaRepository {
 
-
     private static MemoriaTemaRepository soleInstance;
     private List<Tema> pool;
 
