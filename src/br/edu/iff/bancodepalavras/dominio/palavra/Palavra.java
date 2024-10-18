@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.bancodepalavras.dominio.letra.LetraFactory;
+import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.dominio.ObjetoDominioImpl;
 
 public class Palavra extends ObjetoDominioImpl {
