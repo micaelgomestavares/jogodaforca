@@ -1,8 +1,9 @@
 package br.edu.iff.bancodepalavras.dominio.tema;
 
+import br.edu.iff.repository.Repository;
 import br.edu.iff.repository.RepositoryException;
 
-public interface TemaRepository {
+public interface TemaRepository extends Repository {
 
 
     public Tema getPorId(long id);
