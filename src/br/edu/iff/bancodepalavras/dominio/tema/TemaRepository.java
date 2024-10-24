@@ -6,15 +6,15 @@ import br.edu.iff.repository.RepositoryException;
 public interface TemaRepository extends Repository {
 
 
-    public Tema getPorId(long id);
+     Tema getPorId(long id);
 
-    public Tema[] getPorNome(String nome);
+     Tema[] getPorNome(String nome);
 
-    public Tema[] getTodos();
+     Tema[] getTodos();
 
-    public void inserir(Tema tema) throws RepositoryException;
+     void inserir(Tema tema) throws RepositoryException;
 
-    public void atualizar(Tema tema) throws RepositoryException;
+     void atualizar(Tema tema) throws RepositoryException;
 
-    public void remover(Tema tema) throws RepositoryException;
+     void remover(Tema tema) throws RepositoryException;
 }
