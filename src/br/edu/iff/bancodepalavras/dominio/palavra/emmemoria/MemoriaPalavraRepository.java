@@ -37,13 +37,11 @@ public class MemoriaPalavraRepository implements PalavraRepository {
         return (long) this.pool.size();
     }
 
-
     @Override
     public Palavra getPorId(long id) {
 
         return this.pool.get((int) id);
     }
-
 
     @Override
     public Palavra[] getPorTema(Tema tema) {
@@ -53,13 +51,11 @@ public class MemoriaPalavraRepository implements PalavraRepository {
                         .toArray(Palavra[]::new);
     }
 
-
     @Override
     public Palavra[] getTodas() {
         
         return this.pool.toArray(new Palavra[this.pool.size()]);
     }
-
 
     @Override
     public Palavra getPalavra(String palavra) {
@@ -70,20 +66,17 @@ public class MemoriaPalavraRepository implements PalavraRepository {
                         .orElse(null);
     }
 
-
     @Override
     public void inserir(Palavra palavra) throws RepositoryException {
        
         this.pool.add(palavra);
     }
 
-
     @Override
     public void atualizar(Palavra palavra) throws RepositoryException {
         
         this.pool.set((int) palavra.getId(), palavra);
     }
-
 
     @Override
     public void remover(Palavra palavra) throws RepositoryException {
