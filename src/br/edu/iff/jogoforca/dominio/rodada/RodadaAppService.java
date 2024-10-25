@@ -21,11 +21,8 @@ public class RodadaAppService {
 
 
     public static void createSoleInstance(RodadaFactory rodadaFactory, RodadaRepository rodadaRepository, JogadorRepository jogadorRepository) {
-       
-        if (soleInstance == null) {
 
-            soleInstance = new RodadaAppService(rodadaFactory, rodadaRepository, jogadorRepository);
-        }
+        soleInstance = new RodadaAppService(rodadaFactory, rodadaRepository, jogadorRepository);
     }
 
     public static RodadaAppService getSoleInstance() {
