@@ -20,12 +20,12 @@ public class Tema extends ObjetoDominioImpl {
     }
 
     public static Tema criar(long id, String nome) {
+
         return new Tema(id, nome);
     }
 
     public static Tema reconstituir(long id, String nome) {
 
-        //atualizar o tema???
         return new Tema(id, nome);
     }
 
