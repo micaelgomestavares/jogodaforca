@@ -5,6 +5,7 @@ import br.edu.iff.bancodepalavras.dominio.palavra.PalavraRepository;
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.repository.RepositoryException;
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class MemoriaPalavraRepository implements PalavraRepository {
@@ -13,7 +14,10 @@ public class MemoriaPalavraRepository implements PalavraRepository {
     private List<Palavra> pool;
 
 
-    private MemoriaPalavraRepository() {}
+    private MemoriaPalavraRepository() {
+
+        this.pool = new ArrayList<>();
+    }
 
 
     public static MemoriaPalavraRepository getSoleInstance() {
