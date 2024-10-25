@@ -1,3 +1,5 @@
+package br.edu.iff.jogoforca.dominio.rodada;
+
 import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.bancodepalavras.dominio.palavra.Palavra;
 import br.edu.iff.dominio.ObjetoDominioImpl;
@@ -6,7 +8,7 @@ import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 
 import java.util.ArrayList;
 
-public abstract class Rodada extends ObjetoDominioImpl {
+public class Rodada extends ObjetoDominioImpl {
     private static int maxPalavras = 3;
     private static int maxErros = 10;
     private static int pontosQuandoDescobreTodasAsPalavras = 100;
