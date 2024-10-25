@@ -64,7 +64,7 @@ public class Palavra extends ObjetoDominioImpl {
 
         if (posicao >= 0 && posicao < this.letras.length) {
 
-            return getLetraFactory().getLetra(this.letras[posicao].getCodigo());
+            return this.letras[posicao];
         }
         else{
 
