@@ -3,6 +3,7 @@ package br.edu.iff.jogoforca.dominio.rodada;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 import br.edu.iff.repository.RepositoryException;
 
+
 public class RodadaAppService {
 
     private RodadaRepository rodadaRepository;
