@@ -5,6 +5,7 @@ import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
 import br.edu.iff.repository.RepositoryException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -12,6 +13,7 @@ public class MemoriaTemaRepository implements TemaRepository {
 
     private static MemoriaTemaRepository soleInstance;
     private List<Tema> poolTema;
+    private Tema tema;
 
     private MemoriaTemaRepository() {
         poolTema = new ArrayList<>();
@@ -37,17 +39,22 @@ public class MemoriaTemaRepository implements TemaRepository {
 
                 return tema;
             }
-
         }
-        //percorrer arrya de temas, comparando os ids com o parametro
+        //percorrer poolTema comparando o valor do id
         return null;
     }
 
     @Override
     public Tema[] getPorNome(String nome) {
+        List<Tema> temas = new ArrayList<>();
 
-        //retorna uma Array? existe mais de um tema com o mesmo nome??
-        return new Tema[0];
+        for(Tema tema : poolTema){
+            if(tema.getNome().equals(nome)){
+
+                temas.add(tema);
+            }
+        }
+        return temas.toArray(new Tema[0]);
     }
 
     @Override
@@ -59,36 +66,28 @@ public class MemoriaTemaRepository implements TemaRepository {
     @Override
     public void inserir(Tema tema) throws RepositoryException {// erro aqui, diz que metodos overridem não lançam exceção
 
-        if(poolTema.contains(tema)) {
-            throw new RepositoryException();
-        } else {
-            poolTema.add(tema);
-        }
+        poolTema.add(tema);
+
     }
 
     @Override
     public void atualizar(Tema tema) throws RepositoryException {
         int i = poolTema.indexOf(tema);
-        if(i != -1){//se tema na lista
-            poolTema.set(i, tema); //atualiza o objeto
-        }
-        else{
-            throw new RepositoryException();
-        }
+
+        poolTema.set(i, tema); //atualiza o objeto
+
     }
 
     @Override
     public void remover(Tema tema) throws RepositoryException {
         int i = poolTema.indexOf(tema);
 
-        if(i == -1){
-            throw new RepositoryException();
-        }
         poolTema.remove(i);
     }
 
     @Override
     public long getProximoId() {
-        return poolTema.size() + 1;
+
+        return poolTema.size() + 1; //proximo id disponivel
     }
 }
