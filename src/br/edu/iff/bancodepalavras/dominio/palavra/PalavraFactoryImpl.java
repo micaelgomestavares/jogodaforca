@@ -36,19 +36,8 @@ public class PalavraFactoryImpl implements PalavraFactory extends EntityFactory{
 
 
     @Override
-    public Palavra getPalavra(String palavra, Tema tema) {
+    public Palavra criarPalavra(String palavra, Tema tema) {
         
-        Palavra novaPalavra = Palavra.criar(getProximoId(),palavra, tema);
-
-        try {
-
-            getPalavraRepository().inserir(novaPalavra);
-            
-            return novaPalavra;
-
-        } catch (RepositoryException e) {
-            
-            throw new IllegalStateException("Erro ao inserir a palavra no repositório.", e);
-        }       
+        return Palavra.criar(getProximoId(), palavra, tema);  
     }  
 }
