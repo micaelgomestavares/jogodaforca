@@ -5,5 +5,5 @@ import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 
 public interface PalavraFactory {
 
-    public Palavra getPalavra(String palavra, Tema tema);
+    public Palavra criarPalavra(String palavra, Tema tema);
 }
