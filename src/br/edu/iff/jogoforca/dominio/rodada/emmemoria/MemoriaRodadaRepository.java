@@ -61,8 +61,8 @@ public class MemoriaRodadaRepository implements RodadaRepository {
     @Override
     public void atualizar(Rodada rodada) throws RepositoryException {
 
-        rodadaPool.put(rodada.getId(), rodada);
-    } //conferir essa questão da atualização no hashmap
+        rodadaPool.replace(rodada.getId(), rodada);
+    } //replace retorna null caso a chave não exista
 
     @Override
     public void remover(Rodada rodada) throws RepositoryException {
