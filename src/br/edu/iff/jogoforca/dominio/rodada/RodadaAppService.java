@@ -48,6 +48,11 @@ public class RodadaAppService {
 
     public Rodada novaRodada(String nomeJogador) throws JogadorNaoEncontradoException {   
 
+        if(jogadorRepository.getPorNome(nomeJogador) == null) {
+
+            throw new JogadorNaoEncontradoException(nomeJogador);
+        }
+        
         return rodadaFactory.getRodada(jogadorRepository.getPorNome(nomeJogador));
     }
 
