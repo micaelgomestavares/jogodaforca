@@ -1,6 +1,8 @@
 package br.edu.iff.jogoforca.dominio.rodada;
 
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
+import br.edu.iff.jogoforca.dominio.jogador.JogadorNaoEncontradoException;
+import br.edu.iff.jogoforca.dominio.jogador.JogadorRepository;
 import br.edu.iff.repository.RepositoryException;
 
 
@@ -46,7 +48,7 @@ public class RodadaAppService {
         return rodadaFactory.getRodada(jogadorRepository.getPorId(idJogador));
     }
 
-    public Rodada novaRodada(String nomeJogador) throws JogadorNaoEncontradoException {   
+    public Rodada novaRodada(String nomeJogador) throws JogadorNaoEncontradoException {
 
         return rodadaFactory.getRodada(jogadorRepository.getPorNome(nomeJogador));
     }
