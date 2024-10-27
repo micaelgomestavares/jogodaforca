@@ -2,25 +2,27 @@ package br.edu.iff.bancodepalavras.dominio.palavra;
 
 import java.util.Arrays;
 
+import br.edu.iff.bancodepalavras.dominio.letra.Letra;
+import br.edu.iff.bancodepalavras.dominio.letra.LetraFactory;
+import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.dominio.ObjetoDominioImpl;
 
 public class Palavra extends ObjetoDominioImpl {
    
-    private long id;
     private Tema tema;
-    private LetraFactory letraFactory;
+    private static LetraFactory letraFactory;
     private Letra encoberta;
     private Letra[] letras;
  
  
     public static void setLetraFactory(LetraFactory factory) {
        
-        this.letraFactory = factory;
+        letraFactory = factory;
     }
   
     public static LetraFactory getLetraFactory() {
        
-        return this.letraFactory;
+        return letraFactory;
     }
 
 
@@ -52,7 +54,7 @@ public class Palavra extends ObjetoDominioImpl {
 
         for (int i = 0; i < palavra.length(); i++) {
 
-            letras[i] = getLetraFactory().getLetra(palavra.charAt(i));
+            this.letras[i] = getLetraFactory().getLetra(palavra.charAt(i));
         }
 
     }
@@ -60,9 +62,9 @@ public class Palavra extends ObjetoDominioImpl {
 
     public Letra getLetra(int posicao) {
 
-        if (posicao >= 0 && posicao < palavra.length()) {
+        if (posicao >= 0 && posicao < this.letras.length) {
 
-            return letraFactory.criarLetra(palavra.charAt(posicao));
+            return this.letras[posicao];
         }
         else{
 
@@ -105,11 +107,11 @@ public class Palavra extends ObjetoDominioImpl {
   
     public boolean comparar(String palavra) {
 
-        if(palavra.length() == this.getTamanho()) {
+        if(palavra.length() == getTamanho()) {
 
-            for (int i = 0; i < this.getTamanho(); i++) {
+            for (int i = 0; i < getTamanho(); i++) {
 
-                if (!this.getLetra(i).equals(palavra.charAt(i))) {
+                if (getLetra(i).getCodigo() != palavra.charAt(i)) {
 
                     return false;
                 }
@@ -128,7 +130,7 @@ public class Palavra extends ObjetoDominioImpl {
     
         for (int i = 0; i < this.getTamanho(); i++) {
 
-            if (this.getLetra(i).equals(codigo)) {
+            if (this.getLetra(i).getCodigo() == codigo) {
 
                 posicoes[count] = i;
                 count++;
@@ -150,7 +152,7 @@ public class Palavra extends ObjetoDominioImpl {
  
     public int getTamanho() {
 
-        return this.letras.length;
+        return letras.length;
     }
 
     @Override
