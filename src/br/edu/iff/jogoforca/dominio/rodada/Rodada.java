@@ -1,12 +1,14 @@
 import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.bancodepalavras.dominio.palavra.Palavra;
+import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.dominio.ObjetoDominioImpl;
+import br.edu.iff.jogoforca.dominio.boneco.Boneco;
 import br.edu.iff.jogoforca.dominio.boneco.BonecoFactory;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 
 import java.util.ArrayList;
 
-public abstract class Rodada extends ObjetoDominioImpl {
+public class Rodada extends ObjetoDominioImpl {
     private static int maxPalavras = 3;
     private static int maxErros = 10;
     private static int pontosQuandoDescobreTodasAsPalavras = 100;
@@ -23,7 +25,7 @@ public abstract class Rodada extends ObjetoDominioImpl {
         return maxPalavras;
     }
 
-    public static void setMaxPalavras(int max){
+    public static void setMaxPalavras(int maxPalavras){
         Rodada.maxPalavras = maxPalavras;
     }
 
@@ -47,8 +49,8 @@ public abstract class Rodada extends ObjetoDominioImpl {
         return pontosPorLetraEncoberta;
     }
 
-    public static void setPontosPorLetraEncoberta(int pontos){
-        Rodada.pontosPorLetraEncoberta = pontos;
+    public static void setPontosPorLetraEncoberta(int pontosPorLetraEncoberta){
+        Rodada.pontosPorLetraEncoberta = pontosPorLetraEncoberta;
     }
 
     public static void setBonecoFactory(BonecoFactory bonecoFactory){
