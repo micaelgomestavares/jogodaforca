@@ -54,7 +54,7 @@ public class PalavraAppService {
 
         } catch (RepositoryException e) {
             
-            System.out.println(e.getMessage() + "Erro ao inserir palavra.");
+            System.err.println(e.getMessage() + "Erro ao inserir palavra no Repositório.");
 
             return false;
         }
