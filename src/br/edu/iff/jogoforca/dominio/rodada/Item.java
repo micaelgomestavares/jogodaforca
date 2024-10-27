@@ -1,50 +1,65 @@
 package br.edu.iff.jogoforca.dominio.rodada;
 
+import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.dominio.ObjetoDominioImpl;
 import br.edu.iff.jogodaforca.dominio.palavra.Palavra;
 
-public abstract class Item extends ObjetoDominioImpl {
+import java.util.ArrayList;
 
-	private Palavra palavra;
+public class Item extends ObjetoDominioImpl {
 
 	private boolean[] posicoesDescobertas;
-
 	private String palavraArriscada = null;
+	private Palavra palavra;
 
 	static Item criar(long id, Palavra palavra) {
 		return new Item(id, palavra);
 	}
 
-	public static Item reconstruir(long id, Palavra palavra, posicoesDescobertas boolean[], palavraArriscada String) {
+	public static Item reconstruir(long id, Palavra palavra, int[] posicoesDescobertas, String palavraArriscada) {
         return new Item(id, palavra, posicoesDescobertas, palavraArriscada);
     }
 
-	public Item(long id, Palavra palavra) {
+	private Item(long id, Palavra palavra) {
 		super(id);
 		this.palavra = palavra;
-		this.posicoesDescobertas = new boolean[palavra.getTamanho()];
-		for (int i = 0; i < palavra.getTamanho(); i++) {
-			this.posicoesDescobertas[i] = false;
-		}
+		this.posicoesDescobertas = new boolean[this.palavra.getTamanho()];
 	}
 
-	public Item(long id, Palavra palavra, posicoesDescobertas boolean[], palavraArriscada String){
+	private Item(long id, Palavra palavra, int [] posicoesDescobertas, String palavraArriscada){
         super(id);
         this.palavra = palavra;
-        this.posicoesDescobertas = posicoesDescobertas;
+        this.posicoesDescobertas = new boolean[this.palavra.getTamanho()];
+		//varre o array de posicoesDescobertas e seta como true as posições que foram descobertas
+		for(Integer posicao : posicoesDescobertas){
+			this.posicoesDescobertas[posicao] = true;
+		}
         this.palavraArriscada = palavraArriscada;
     }
 
+	//duvida = nao deveria fazer uma copia defensiva de palavra?
 	public Palavra getPalavra() {
 		return palavra;
 	}
 
-	public Letra[] getLetrasEncobertas() {
-
+	public Letra[] getLetrasDescobertas() {
+		ArrayList<Letra> letrasDescobertasLista = new ArrayList<Letra>();
+		for(int posicaoAtual = 0; posicaoAtual < this.palavra.getTamanho(); posicaoAtual++){
+			if(this.posicoesDescobertas[posicaoAtual]){
+				letrasDescobertasLista.add(this.palavra.getLetra(posicaoAtual));
+			}
+		}
+		return letrasDescobertasLista.toArray(new Letra[letrasDescobertasLista.size()]);
 	}
 
-	public Letra[] getLetrasDescobertas() {
-
+	public Letra[] getLetrasEncobertas() {
+		ArrayList<Letra> letrasDescobertasLista = new ArrayList<Letra>();
+		for(int posicaoAtual = 0; posicaoAtual < this.palavra.getTamanho(); posicaoAtual++){
+			if(!this.posicoesDescobertas[posicaoAtual]){
+				letrasDescobertasLista.add(this.palavra.getLetra(posicaoAtual));
+			}
+		}
+		return letrasDescobertasLista.toArray(new Letra[letrasDescobertasLista.size()]);
 	}
 
 	public int qtdeLetrasEncobertas() {
@@ -58,24 +73,28 @@ public abstract class Item extends ObjetoDominioImpl {
 		return contador;
 	}
 
-	public calcularPontosLetrasEncobertas(){
-
+	public int calcularPontosLetrasEncobertas(int pontosPorLetraEncoberta){
+		return this.qtdeLetrasEncobertas() * pontosPorLetraEncoberta;
     }
 
 	public boolean descobriu(){
-        return qtdeLetras
+        return this.acertou() || this.qtdeLetrasEncobertas()==0;
     }
 
-	public exibir(Object contexto){
-        palavra.exibir(contexto, posicoesDescobertas);
+	public void exibir(Object contexto){
+        this.palavra.exibir(contexto, this.posicoesDescobertas);
     }
 
-	boolean tentar() {
-
+	boolean tentar(char codigo) {
+		int[] posicoes = palavra.tentar(codigo);
+		for (int posicao : posicoes) {
+			posicoesDescobertas[posicao] = true;
+		}
+		return posicoes.length > 0;
 	}
 
-	void arriscar() {
-		palavraArriscada = palavra;
+	void arriscar(String palavra) {
+		this.palavraArriscada = palavra;
 	}
 
 	public String getPalavraArriscada() {
