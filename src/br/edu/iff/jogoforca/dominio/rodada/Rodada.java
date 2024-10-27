@@ -9,6 +9,8 @@ import br.edu.iff.jogoforca.dominio.boneco.BonecoFactory;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Rodada extends ObjetoDominioImpl {
     private static int maxPalavras = 3;

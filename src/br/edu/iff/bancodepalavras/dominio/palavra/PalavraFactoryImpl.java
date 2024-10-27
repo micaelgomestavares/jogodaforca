@@ -1,6 +1,7 @@
 package br.edu.iff.bancodepalavras.dominio.palavra;
 
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
+import br.edu.iff.factory.EntityFactory;
 import br.edu.iff.repository.RepositoryException;
 
 

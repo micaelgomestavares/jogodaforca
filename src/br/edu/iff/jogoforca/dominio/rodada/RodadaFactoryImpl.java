@@ -1,7 +1,7 @@
 package br.edu.iff.jogoforca.dominio.rodada;
 
-import br.edu.iff.jogoforca.dominio.palavra.PalavraRepository;
-import br.edu.iff.jogoforca.dominio.tema.TemaRepository;
+import br.edu.iff.bancodepalavras.dominio.palavra.PalavraRepository;
+import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
 import br.edu.iff.factory.EntityFactory;
 
 

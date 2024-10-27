@@ -1,12 +1,16 @@
 package br.edu.iff.jogoforca.dominio.rodada.sorteio;
 
+import br.edu.iff.bancodepalavras.dominio.palavra.Palavra;
+import br.edu.iff.bancodepalavras.dominio.palavra.PalavraRepository;
+import br.edu.iff.bancodepalavras.dominio.tema.Tema;
+import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 import br.edu.iff.jogoforca.dominio.rodada.RodadaFactoryImpl;
 import br.edu.iff.jogoforca.dominio.rodada.RodadaRepository;
-import br.edu.iff.jogoforca.dominio.tema.TemaRepository;
-import br.edu.iff.jogoforca.dominio.palavra.PalavraRepository;
+
 import br.edu.iff.jogoforca.dominio.rodada.Rodada;
 
+import java.util.Arrays;
 import java.util.Random;
 
 
