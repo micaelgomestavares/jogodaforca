@@ -30,6 +30,7 @@ public class MemoriaRodadaRepository implements RodadaRepository {
     private MemoriaRodadaRepository(){
 
         rodadaPool = new HashMap<>();
+        idCounter = new AtomicLong(0L);
     }
 
     @Override
