@@ -13,11 +13,11 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class MemoriaRodadaRepository implements RodadaRepository {
 
-    private MemoriaRodadaRepository soleInstance;
+    private static MemoriaRodadaRepository soleInstance;
     private Map<Long, Rodada> rodadaPool;
     private AtomicLong idCounter;
 
-    public MemoriaRodadaRepository getSoleInstance(){
+    public static MemoriaRodadaRepository getSoleInstance(){
 
         if(soleInstance == null){
 
