@@ -3,7 +3,8 @@ package br.edu.iff.bancodepalavras.dominio.palavra;
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.repository.RepositoryException;
 
-public class PalavraFactoryImpl implements PalavraFactory extends EntityFactory{
+
+public class PalavraFactoryImpl extends EntityFactory implements PalavraFactory {
     
     private static PalavraFactoryImpl soleInstance;
 
