@@ -65,7 +65,7 @@ public class RodadaAppService {
 
         } catch (RepositoryException e) {
 
-            System.out.println("Erro ao salvar rodada: " + e.getMessage());
+            System.err.println("Erro ao salvar rodada: " + e.getMessage());
             return false;
         }     
     }
