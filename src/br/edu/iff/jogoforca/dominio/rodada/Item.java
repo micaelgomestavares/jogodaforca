@@ -6,7 +6,7 @@ import br.edu.iff.jogodaforca.dominio.palavra.Palavra;
 
 import java.util.ArrayList;
 
-public abstract class Item extends ObjetoDominioImpl {
+public class Item extends ObjetoDominioImpl {
 
 	private boolean[] posicoesDescobertas;
 	private String palavraArriscada = null;
@@ -23,7 +23,7 @@ public abstract class Item extends ObjetoDominioImpl {
 	private Item(long id, Palavra palavra) {
 		super(id);
 		this.palavra = palavra;
-		this.posicoesDescobertas = new boolean[palavra.getTamanho()];
+		this.posicoesDescobertas = new boolean[this.palavra.getTamanho()];
 	}
 
 	private Item(long id, Palavra palavra, int [] posicoesDescobertas, String palavraArriscada){
@@ -37,6 +37,7 @@ public abstract class Item extends ObjetoDominioImpl {
         this.palavraArriscada = palavraArriscada;
     }
 
+	//duvida = nao deveria fazer uma copia defensiva de palavra?
 	public Palavra getPalavra() {
 		return palavra;
 	}
