@@ -29,12 +29,12 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        palavraAppService.novaPalavra("fusca", 1);
-        palavraAppService.novaPalavra("palio", 1);
-        palavraAppService.novaPalavra("corsa", 1);
-        palavraAppService.novaPalavra("felipe", 2);
-        palavraAppService.novaPalavra("ana", 2);
-        palavraAppService.novaPalavra("jorge", 2);
+        palavraAppService.novaPalavra("fusca", (long)1);
+        palavraAppService.novaPalavra("palio", (long)1);
+        palavraAppService.novaPalavra("corsa", (long)1);
+        palavraAppService.novaPalavra("felipe", (long)2);
+        palavraAppService.novaPalavra("ana", (long)2);
+        palavraAppService.novaPalavra("jorge", (long) 2);
 
         System.out.println("Digite seu nome: ");
         String nomeJogador = scanner.next();

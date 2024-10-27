@@ -164,8 +164,8 @@ public class Rodada extends ObjetoDominioImpl {
         if(!descobriu){
             this.erradas.add(this.itens[0].getPalavra().getLetraFactory().getLetra(codigo));
         }
-        if(this.encerrrou()){
-            this.jogador.setPontuacao(this.jogador.getPontuacao() + this.calcularPontos());
+        if(this.encerrou()){
+            this.jogador.atualizarPontuacao(this.jogador.getPontuacao() + this.calcularPontos());
         }
     }
 
@@ -244,6 +244,7 @@ public class Rodada extends ObjetoDominioImpl {
     }
 
     public boolean encerrou() {
+
         return this.arriscou() || this.descobriu() || this.getQtdeTentativasRestantes() == 0;
     }
 

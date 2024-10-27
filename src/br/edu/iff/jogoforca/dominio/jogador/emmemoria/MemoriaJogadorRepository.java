@@ -29,7 +29,7 @@ public class MemoriaJogadorRepository implements JogadorRepository {
     }
 
     @Override
-    public Jogador getPorid(long id) {
+    public Jogador getPorId(long id) {
 
         for (Jogador jogador : poolJogador){
 

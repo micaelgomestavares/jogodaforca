@@ -5,7 +5,7 @@ import br.edu.iff.repository.RepositoryException;
 
 public interface JogadorRepository extends Repository {
 
-    Jogador getPorid(long id);
+    Jogador getPorId(long id);
 
     Jogador getPorNome(String nome);
 

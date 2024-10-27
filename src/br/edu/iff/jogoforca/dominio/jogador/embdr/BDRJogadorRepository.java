@@ -1,37 +1,52 @@
 package br.edu.iff.jogoforca.dominio.jogador.embdr;
 
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
-import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
+import br.edu.iff.bancodepalavras.dominio.tema.embdr.BDRTemaRepository;
+import br.edu.iff.jogoforca.dominio.jogador.Jogador;
+import br.edu.iff.jogoforca.dominio.jogador.JogadorRepository;
 import br.edu.iff.repository.RepositoryException;
 
-public class BDRJogadorRepository implements TemaRepository {
-    @Override
-    public Tema getPorId(long id) {
-        return null;
+public class BDRJogadorRepository implements JogadorRepository {
+
+    private static BDRJogadorRepository soleInstance;
+
+    private BDRJogadorRepository() {}
+
+    public static BDRJogadorRepository getSoleInstance() {
+
+        if (soleInstance == null) {
+
+            soleInstance = new BDRJogadorRepository();
+        }
+
+        return soleInstance;
     }
 
     @Override
-    public Tema[] getPorNome(String nome) {
-        return new Tema[0];
+    public Jogador getPorId(long id) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'getPorId'");
     }
 
     @Override
-    public Tema[] getTodos() {
-        return new Tema[0];
+    public Jogador getPorNome(String nome) {
+
+        throw new UnsupportedOperationException("Unimplemented method 'getPorNome'");
     }
 
     @Override
-    public void inserir(Tema tema) throws RepositoryException {
+    public void inserir(Jogador jogador) throws RepositoryException {
+
+        throw new UnsupportedOperationException("Unimplemented method 'inserir'");
+    }
+
+    @Override
+    public void atualizar(Jogador jogador) throws RepositoryException {
 
     }
 
     @Override
-    public void atualizar(Tema tema) throws RepositoryException {
-
-    }
-
-    @Override
-    public void remover(Tema tema) throws RepositoryException {
+    public void remover(Jogador jogador) throws RepositoryException {
 
     }
 
