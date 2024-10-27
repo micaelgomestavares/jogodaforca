@@ -2,6 +2,7 @@ package br.edu.iff.jogoforca.emmemoria;
 
 import br.edu.iff.bancodepalavras.dominio.tema.emmemoria.MemoriaTemaRepository;
 import br.edu.iff.jogoforca.RepositoryFactory;
+import br.edu.iff.jogoforca.dominio.jogador.emmemoria.MemoriaJogadorRepository;
 
 public class MemoriaRepositoryFactory implements RepositoryFactory {
 
@@ -36,6 +37,7 @@ public class MemoriaRepositoryFactory implements RepositoryFactory {
 
 	@Override
 	public JogadorRepository getJogadorRepository() {
+
 		return MemoriaJogadorRepository.getSoleInstance();
 	}
 

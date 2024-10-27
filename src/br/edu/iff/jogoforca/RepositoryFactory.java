@@ -1,16 +1,17 @@
 package br.edu.iff.jogoforca;
 
+import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
+import br.edu.iff.jogoforca.dominio.jogador.JogadorRepository;
+
 public interface RepositoryFactory {
 
-	/*
-	 * TODO: Importar as classes quando disponíveis.
-	 */
-	public PalavraRepository getPalavraRepository();
 
-	public TemaRepository getTemaRepository();
+	PalavraRepository getPalavraRepository();
 
-	public RodadaRepository getRodadaRepository();
+	TemaRepository getTemaRepository();
 
-	public JogadorRepository getJogadorRepository();
+	RodadaRepository getRodadaRepository();
+
+	JogadorRepository getJogadorRepository();
 
 }
