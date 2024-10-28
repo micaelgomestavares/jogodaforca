@@ -1,13 +1,12 @@
 package br.edu.iff.jogoforca.dominio.jogador;
 
 import br.edu.iff.factory.EntityFactory;
-import br.edu.iff.repository.Repository;
+
 
 public class JogadorFactoryImpl extends EntityFactory implements JogadorFactory {
 
     private static JogadorRepository jogadorRepository;
     private static JogadorFactoryImpl soleInstance;
-    private Jogador jogador;
 
 
     public static void createSoleInstance(JogadorRepository repository) {
@@ -42,7 +41,7 @@ public class JogadorFactoryImpl extends EntityFactory implements JogadorFactory 
 
     public Jogador getJogador(String nome) {
 
-        return jogador.criar(getProximoId(), nome);
+        return Jogador.criar(getProximoId(), nome);
     }
 
 
