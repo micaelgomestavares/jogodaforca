@@ -30,48 +30,6 @@ public class Main {
 
         adicionarTemasEPalavrasDeArquivo("jogo.txt", temaRepository, temaFactory, palavraAppService);
 
-        while (true) {
-            System.out.print("Deseja cadastrar um novo tema? (s/n): ");
-            String resposta = scanner.nextLine().trim().toLowerCase();
-
-            if (resposta.equals("s")) {
-                System.out.print("Digite o nome do tema que você quer cadastrar: ");
-                String nomeTema = scanner.nextLine();
-
-                Tema tema = temaFactory.getTema(nomeTema);
-
-                try {
-                    temaRepository.inserir(tema);
-                } catch (RepositoryException e) {
-                    System.out.println("Erro ao inserir o tema: " + e.getMessage());
-                    continue;
-                }
-
-                Long temaId = tema.getId();
-
-                System.out.print("Quantas palavras você quer adicionar para o tema '" + nomeTema + "'? ");
-                int numPalavras = scanner.nextInt();
-                scanner.nextLine();
-
-                for (int i = 0; i < numPalavras; i++) {
-                    System.out.print("Digite a palavra: ");
-                    String palavra = scanner.nextLine();
-
-                    try {
-                        palavraAppService.novaPalavra(palavra, temaId);
-                    } catch (Exception e) {
-                        System.out.println("Erro ao adicionar a palavra: " + e.getMessage());
-                        i--;
-                    }
-                }
-
-            } else if (resposta.equals("n")) {
-                break;
-            } else {
-                System.out.println("Resposta inválida. Por favor, digite 's' para sim ou 'n' para não.");
-            }
-        }
-
         System.out.print("Deseja iniciar a partida? (s/n): ");
         String iniciarPartida = scanner.nextLine().trim().toLowerCase();
 
