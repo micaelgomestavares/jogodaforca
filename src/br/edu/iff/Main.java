@@ -138,7 +138,7 @@ public class Main {
 
                 } catch (RepositoryException e) {
 
-                    System.out.println("Erro ao inserir o tema '" + nomeTema + "': " + e.getMessage());
+                    System.err.println("Erro ao inserir o tema '" + nomeTema + "': " + e.getMessage());
                     continue;
                 }
 
@@ -152,14 +152,14 @@ public class Main {
 
                     } catch (Exception e) {
 
-                        System.out.println("Erro ao adicionar a palavra '" + palavra + "' para o tema '" + nomeTema + "': " + e.getMessage());
+                        System.err.println("Erro ao adicionar a palavra '" + palavra + "' para o tema '" + nomeTema + "': " + e.getMessage());
                     }
                 }
             }
 
         } catch (IOException e) {
 
-            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+            System.err.println("Erro ao ler o arquivo: " + e.getMessage());
         }
     }
 }
