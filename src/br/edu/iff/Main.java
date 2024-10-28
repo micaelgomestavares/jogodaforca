@@ -11,6 +11,9 @@ import br.edu.iff.jogoforca.dominio.rodada.RodadaAppService;
 import br.edu.iff.repository.RepositoryException;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -24,6 +27,8 @@ public class Main {
 
         TemaRepository temaRepository = aplicacao.getRepositoryFactory().getTemaRepository();
         TemaFactory temaFactory = aplicacao.getTemaFactory();
+
+        adicionarTemasEPalavrasDeArquivo("jogo.txt", temaRepository, temaFactory, palavraAppService);
 
         while (true) {
             System.out.print("Deseja cadastrar um novo tema? (s/n): ");
@@ -88,6 +93,7 @@ public class Main {
         }
     }
 
+
     private static void jogarRodada(Jogador jogador) {
         RodadaAppService rodadaAppService = RodadaAppService.getSoleInstance();
 
@@ -144,6 +150,58 @@ public class Main {
 
         if (!rodada.descobriu()) {
             System.out.println("Que pena! Você não conseguiu descobrir as palavras.");
+        }
+    }
+
+    private static void adicionarTemasEPalavrasDeArquivo(String arquivo, TemaRepository temaRepository, TemaFactory temaFactory, PalavraAppService palavraAppService) {
+        
+        try (BufferedReader br = new BufferedReader(new FileReader(arquivo))) {
+           
+            String linha;
+
+            while ((linha = br.readLine()) != null) {
+                
+                String[] partes = linha.split(":");
+               
+                if (partes.length < 2) {
+                    
+                    System.out.println("Formato de linha inválido: " + linha);
+                    continue;
+                }
+
+                String nomeTema = partes[0].trim();
+                String[] palavras = partes[1].split(",");
+
+                Tema tema = temaFactory.getTema(nomeTema);
+
+                try {
+
+                    temaRepository.inserir(tema);
+
+                } catch (RepositoryException e) {
+
+                    System.out.println("Erro ao inserir o tema '" + nomeTema + "': " + e.getMessage());
+                    continue;
+                }
+
+                for (String palavra : palavras) {
+
+                    palavra = palavra.trim();
+
+                    try {
+
+                        palavraAppService.novaPalavra(palavra, tema.getId());
+
+                    } catch (Exception e) {
+
+                        System.out.println("Erro ao adicionar a palavra '" + palavra + "' para o tema '" + nomeTema + "': " + e.getMessage());
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
         }
     }
 }
