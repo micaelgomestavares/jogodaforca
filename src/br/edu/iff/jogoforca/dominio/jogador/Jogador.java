@@ -1,8 +1,7 @@
 package br.edu.iff.jogoforca.dominio.jogador;
 
-import br.edu.iff.bancodepalavras.dominio.tema.Tema;
-import br.edu.iff.dominio.ObjetoDominio;
 import br.edu.iff.dominio.ObjetoDominioImpl;
+
 
 public class Jogador extends ObjetoDominioImpl {
 
