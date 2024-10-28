@@ -1,7 +1,5 @@
 package br.edu.iff.jogoforca.dominio.jogador.embdr;
 
-import br.edu.iff.bancodepalavras.dominio.tema.Tema;
-import br.edu.iff.bancodepalavras.dominio.tema.embdr.BDRTemaRepository;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 import br.edu.iff.jogoforca.dominio.jogador.JogadorRepository;
 import br.edu.iff.repository.RepositoryException;

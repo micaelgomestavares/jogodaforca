@@ -2,7 +2,6 @@ package br.edu.iff.bancodepalavras.dominio.tema.embdr;
 
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
-import br.edu.iff.bancodepalavras.dominio.tema.emmemoria.MemoriaTemaRepository;
 import br.edu.iff.repository.RepositoryException;
 
 public class BDRTemaRepository implements TemaRepository {
