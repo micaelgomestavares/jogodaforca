@@ -38,7 +38,7 @@ public class Item extends ObjetoDominioImpl {
 
     //duvida = nao deveria fazer uma copia defensiva de palavra?
     public Palavra getPalavra() {
-        return palavra;
+        return this.palavra;
     }
 
     public Letra[] getLetrasDescobertas() {
@@ -87,7 +87,7 @@ public class Item extends ObjetoDominioImpl {
     boolean tentar(char codigo) {
         int[] posicoes = this.palavra.tentar(codigo);
         for (int posicao : posicoes) {
-            posicoesDescobertas[posicao] = true;
+            this.posicoesDescobertas[posicao] = true;
         }
         return posicoes.length > 0;
     }
