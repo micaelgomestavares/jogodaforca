@@ -51,6 +51,7 @@ public class Palavra extends ObjetoDominioImpl {
         super(id);
         this.tema = tema;
         this.encoberta = getLetraFactory().getLetraEncoberta();
+        this.letras = new Letra[palavra.length()];
 
         for (int i = 0; i < palavra.length(); i++) {
 
@@ -62,7 +63,7 @@ public class Palavra extends ObjetoDominioImpl {
 
     public Letra getLetra(int posicao) {
 
-        if (posicao >= 0 && posicao < this.letras.length) {
+        if (0 <= posicao && posicao < this.letras.length) {
 
             return this.letras[posicao];
         }
@@ -106,6 +107,11 @@ public class Palavra extends ObjetoDominioImpl {
     }
   
     public boolean comparar(String palavra) {
+
+        if(palavra == null) {
+
+                return false;
+        }
 
         if(palavra.length() == getTamanho()) {
 

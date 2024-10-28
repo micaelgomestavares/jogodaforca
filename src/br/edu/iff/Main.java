@@ -1,4 +1,5 @@
 package br.edu.iff;
+
 import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.bancodepalavras.dominio.palavra.PalavraAppService;
 import br.edu.iff.bancodepalavras.dominio.tema.TemaFactory;
@@ -54,7 +55,7 @@ public class Main {
         RodadaAppService rodadaAppService = RodadaAppService.getSoleInstance();
 
         Rodada rodada = rodadaAppService.novaRodada(jogador);
-        System.out.println("Tema das palavras: " + rodada.getTema());
+        System.out.println("Tema das palavras: " + rodada.getTema().getNome());
 
         do {
             System.out.println("Tentativas restantes: " + rodada.getQtdeTentativasRestantes());

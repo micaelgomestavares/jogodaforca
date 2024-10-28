@@ -85,7 +85,7 @@ public class Item extends ObjetoDominioImpl {
     }
 
     boolean tentar(char codigo) {
-        int[] posicoes = palavra.tentar(codigo);
+        int[] posicoes = this.palavra.tentar(codigo);
         for (int posicao : posicoes) {
             posicoesDescobertas[posicao] = true;
         }
@@ -105,6 +105,7 @@ public class Item extends ObjetoDominioImpl {
     }
 
     public boolean acertou() {
-        return palavraArriscada.equals(palavra.toString());
+        //return palavraArriscada.equals(palavra.toString());
+        return palavra.comparar(this.palavraArriscada);
     }
 }
