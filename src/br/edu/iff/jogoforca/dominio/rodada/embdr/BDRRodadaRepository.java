@@ -1,6 +1,5 @@
 package br.edu.iff.jogoforca.dominio.rodada.embdr;
 
-import br.edu.iff.bancodepalavras.dominio.tema.embdr.BDRTemaRepository;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 import br.edu.iff.jogoforca.dominio.rodada.Rodada;
 import br.edu.iff.jogoforca.dominio.rodada.RodadaRepository;
