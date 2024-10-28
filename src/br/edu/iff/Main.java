@@ -28,7 +28,7 @@ public class Main {
         TemaRepository temaRepository = aplicacao.getRepositoryFactory().getTemaRepository();
         TemaFactory temaFactory = aplicacao.getTemaFactory();
 
-        adicionarTemasEPalavrasDeArquivo("jogo.txt", temaRepository, temaFactory, palavraAppService);
+        adicionarTemasEPalavrasDeArquivo("src/br/edu/iff/jogo.txt", temaRepository, temaFactory, palavraAppService);
 
         System.out.print("Deseja iniciar a partida? (s/n): ");
         String iniciarPartida = scanner.nextLine().trim().toLowerCase();
