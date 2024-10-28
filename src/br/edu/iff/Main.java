@@ -101,6 +101,7 @@ public class Main {
 
             if (rodada.descobriu()) {
                 System.out.println("Parabéns! Você descobriu!");
+                System.out.println("Pontuação: " + rodada.calcularPontos());
                 break;
             }
 
