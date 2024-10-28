@@ -5,7 +5,6 @@ import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
 import br.edu.iff.repository.RepositoryException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -13,7 +12,7 @@ public class MemoriaTemaRepository implements TemaRepository {
 
     private static MemoriaTemaRepository soleInstance;
     private List<Tema> poolTema;
-    private Tema tema;
+
 
     private MemoriaTemaRepository() {
         poolTema = new ArrayList<>();
