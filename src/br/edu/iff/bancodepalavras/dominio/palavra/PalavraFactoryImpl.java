@@ -2,7 +2,6 @@ package br.edu.iff.bancodepalavras.dominio.palavra;
 
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.factory.EntityFactory;
-import br.edu.iff.repository.RepositoryException;
 
 
 public class PalavraFactoryImpl extends EntityFactory implements PalavraFactory {
@@ -40,6 +39,6 @@ public class PalavraFactoryImpl extends EntityFactory implements PalavraFactory 
     @Override
     public Palavra criarPalavra(String palavra, Tema tema) {
         
-        return Palavra.criar(getProximoId(), palavra, tema);  
+        return Palavra.criar(getPalavraRepository().getProximoId(), palavra, tema);  
     }  
 }
