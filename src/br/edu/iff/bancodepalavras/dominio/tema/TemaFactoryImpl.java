@@ -1,10 +1,11 @@
 package br.edu.iff.bancodepalavras.dominio.tema;
 
-public class TemaFactoryImpl implements TemaFactory{
+import br.edu.iff.factory.EntityFactory;
+
+public class TemaFactoryImpl extends EntityFactory implements TemaFactory{
 
     private static TemaFactoryImpl soleInstance;
-    private static TemaRepository temaRepository;
-    private Tema tema;
+
 
     public static void createSoleInstance(TemaRepository repository) {
 
@@ -22,19 +23,19 @@ public class TemaFactoryImpl implements TemaFactory{
 
     }
 
-    private TemaFactoryImpl(TemaRepository temaRepository) {
+    private TemaFactoryImpl(TemaRepository repository) {
 
-        this.temaRepository = temaRepository;
+        super(repository);
 
     }
 
     private TemaRepository getTemaRepository(){
 
-        return temaRepository; // retorna
+        return (TemaRepository) getRepository();
     }
 
     public Tema getTema(String nome) {
 
-        return tema.criar(temaRepository.getProximoId(), nome);
+        return Tema.criar(getProximoId(), nome);
     }
 }
