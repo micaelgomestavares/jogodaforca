@@ -2,6 +2,7 @@ package br.edu.iff;
 
 import br.edu.iff.bancodepalavras.dominio.letra.Letra;
 import br.edu.iff.bancodepalavras.dominio.palavra.PalavraAppService;
+import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.bancodepalavras.dominio.tema.TemaFactory;
 import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
 import br.edu.iff.jogoforca.Aplicacao;
@@ -9,6 +10,7 @@ import br.edu.iff.jogoforca.dominio.rodada.Rodada;
 import br.edu.iff.jogoforca.dominio.rodada.RodadaAppService;
 import br.edu.iff.repository.RepositoryException;
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
+
 import java.util.Scanner;
 
 public class Main {
@@ -23,32 +25,66 @@ public class Main {
         TemaRepository temaRepository = aplicacao.getRepositoryFactory().getTemaRepository();
         TemaFactory temaFactory = aplicacao.getTemaFactory();
 
-        try {
-            temaRepository.inserir(temaFactory.getTema("Carro"));
-            temaRepository.inserir(temaFactory.getTema("Nome"));
-        } catch (RepositoryException e) {
-            throw new RuntimeException(e);
+        while (true) {
+            System.out.print("Deseja cadastrar um novo tema? (s/n): ");
+            String resposta = scanner.nextLine().trim().toLowerCase();
+
+            if (resposta.equals("s")) {
+                System.out.print("Digite o nome do tema que você quer cadastrar: ");
+                String nomeTema = scanner.nextLine();
+
+                Tema tema = temaFactory.getTema(nomeTema);
+
+                try {
+                    temaRepository.inserir(tema);
+                } catch (RepositoryException e) {
+                    System.out.println("Erro ao inserir o tema: " + e.getMessage());
+                    continue;
+                }
+
+                Long temaId = tema.getId();
+
+                System.out.print("Quantas palavras você quer adicionar para o tema '" + nomeTema + "'? ");
+                int numPalavras = scanner.nextInt();
+                scanner.nextLine();
+
+                for (int i = 0; i < numPalavras; i++) {
+                    System.out.print("Digite a palavra: ");
+                    String palavra = scanner.nextLine();
+
+                    try {
+                        palavraAppService.novaPalavra(palavra, temaId);
+                    } catch (Exception e) {
+                        System.out.println("Erro ao adicionar a palavra: " + e.getMessage());
+                    }
+                }
+
+            } else if (resposta.equals("n")) {
+                break;
+            } else {
+                System.out.println("Resposta inválida. Por favor, digite 's' para sim ou 'n' para não.");
+            }
         }
 
-        palavraAppService.novaPalavra("fusca", (long)1);
-        palavraAppService.novaPalavra("palio", (long)1);
-        palavraAppService.novaPalavra("corsa", (long)1);
-        palavraAppService.novaPalavra("felipe", (long)2);
-        palavraAppService.novaPalavra("ana", (long)2);
-        palavraAppService.novaPalavra("jorge", (long) 2);
+        System.out.print("Deseja iniciar a partida? (s/n): ");
+        String iniciarPartida = scanner.nextLine().trim().toLowerCase();
 
-        System.out.println("Digite seu nome: ");
-        String nomeJogador = scanner.next();
+        if (iniciarPartida.equals("s")) {
+            System.out.print("Digite seu nome: ");
+            String nomeJogador = scanner.nextLine();
 
-        Jogador jogador = aplicacao.getJogadorFactory().getJogador(nomeJogador);
+            Jogador jogador = aplicacao.getJogadorFactory().getJogador(nomeJogador);
 
-        try {
-            aplicacao.getRepositoryFactory().getJogadorRepository().inserir(jogador);
-        } catch (RepositoryException e) {
-            throw new RuntimeException(e);
+            try {
+                aplicacao.getRepositoryFactory().getJogadorRepository().inserir(jogador);
+            } catch (RepositoryException e) {
+                throw new RuntimeException("Erro ao inserir o jogador: " + e.getMessage());
+            }
+
+            jogarRodada(jogador);
+        } else {
+            System.out.println("Encerrando o jogo. Até a próxima!");
         }
-
-        jogarRodada(jogador);
     }
 
     private static void jogarRodada(Jogador jogador) {
@@ -59,46 +95,54 @@ public class Main {
 
         do {
             System.out.println("Tentativas restantes: " + rodada.getQtdeTentativasRestantes());
-            System.out.println("Tentativas anteriores: ");
+            System.out.print("Tentativas anteriores: ");
 
             for (Letra letraTentativa : rodada.getTentativas()) {
                 letraTentativa.exibir(null);
                 System.out.print(" ");
             }
 
-            System.out.println("Palavras:");
+            System.out.println("\nPalavra atual: ");
             rodada.exibirItens(null);
 
-            System.out.println();
-            System.out.println("Corpo: ");
-
+            System.out.println("\nCorpo: ");
             rodada.exibirBoneco(null);
             System.out.println();
 
-
             System.out.println("(1) Tentar letra");
             System.out.println("(2) Arriscar");
+            System.out.print("Escolha uma opção: ");
 
             String escolha = scanner.next();
 
-            switch (escolha){
+            switch (escolha) {
                 case "1":
                     System.out.print("Digite a letra: ");
                     rodada.tentar(scanner.next().charAt(0));
                     break;
                 case "2":
                     String[] palavrasArriscadas = new String[rodada.getNumPalavras()];
+                    scanner.nextLine();
                     for (int i = 0; i < palavrasArriscadas.length; i++) {
-                        System.out.print("Chute a palavra " + (i + 1)  + " :");
-                        palavrasArriscadas[i] = scanner.next();
+                        System.out.print("Chute a palavra " + (i + 1) + ": ");
+                        palavrasArriscadas[i] = scanner.nextLine();
                     }
                     rodada.arriscar(palavrasArriscadas);
                     break;
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
             }
 
-            if (rodada.descobriu()) System.out.println("Descobriu!");
+            if (rodada.descobriu()) {
+                System.out.println("Parabéns! Você descobriu!");
+                break;
+            }
 
+        } while (!rodada.encerrou());
 
-        }  while (!rodada.encerrou());
+        if (!rodada.descobriu()) {
+            System.out.println("Que pena! Você não conseguiu descobrir as palavras.");
+        }
     }
 }
