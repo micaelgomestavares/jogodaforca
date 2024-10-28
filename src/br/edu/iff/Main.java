@@ -56,6 +56,7 @@ public class Main {
                         palavraAppService.novaPalavra(palavra, temaId);
                     } catch (Exception e) {
                         System.out.println("Erro ao adicionar a palavra: " + e.getMessage());
+                        i--;
                     }
                 }
 
