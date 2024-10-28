@@ -37,7 +37,7 @@ public class Rodada extends ObjetoDominioImpl {
         return maxErros;
     }
 
-    public static void setMaxErros(int max){
+    public static void setMaxErros(int maxErros){
         Rodada.maxErros = maxErros;
     }
 
@@ -162,7 +162,7 @@ public class Rodada extends ObjetoDominioImpl {
         }
 
         if(!descobriu){
-            this.erradas.add(this.itens[0].getPalavra().getLetraFactory().getLetra(codigo));
+            this.erradas.add(Palavra.getLetraFactory().getLetra(codigo));
         }
         if(this.encerrou()){
             this.jogador.atualizarPontuacao(this.jogador.getPontuacao() + this.calcularPontos());
