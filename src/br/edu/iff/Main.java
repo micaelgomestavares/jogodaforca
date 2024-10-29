@@ -77,9 +77,9 @@ public class Main {
                 System.out.print(" | ");
             }
 
-            System.out.println("\n\n-------Palavras-------\n"); 
+            System.out.println("\n\n---------Palavras---------\n"); 
             rodada.exibirItens(null);
-            System.out.println("----------------------");
+            System.out.println("--------------------------");
 
             System.out.println("\nCorpo: ");
             rodada.exibirBoneco(null);
