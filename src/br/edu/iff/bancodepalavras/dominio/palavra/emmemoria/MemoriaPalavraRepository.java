@@ -34,6 +34,11 @@ public class MemoriaPalavraRepository implements PalavraRepository {
     @Override
     public long getProximoId() {
         
+        if (this.pool.isEmpty()) {
+
+            return 1L;
+        }
+        
         return this.pool.getLast().getId() + 1L;
     }
 
