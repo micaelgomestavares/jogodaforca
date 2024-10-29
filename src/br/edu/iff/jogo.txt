@@ -1,3 +1,12 @@
-animais:gato,cachorro,elefante,leao
-frutas:maca,banana,laranja,melancia
-paises:brasil,argentina,canada,india
+animais:gato,cachorro,elefante,leao,rato,cobra
+frutas:maca,banana,laranja,melancia,melao,carambola
+paises:brasil,argentina,canada,india,inglaterra,japao
+flores: rosa, margarida, girassol, tulipa, orquidea, jasmim
+cores: vermelho, azul, verde, amarelo, roxo, rosa
+instrumentos: piano, violino, guitarra, flauta, bateria, saxofone
+esportes: futebol, basquete, volei, tenis, natacao, atletismo
+profissoes: medico, professor, engenheiro, advogado, artista, bombeiro
+veiculos: carro, moto, bicicleta, caminhao, onibus, trem
+planetas: mercurio, venus, terra, marte, jupiter, saturno
+sentimentos: alegria, tristeza, raiva, medo, surpresa, confianca
+roupas: camisa, calca, vestido, saia, casaco, bermuda
