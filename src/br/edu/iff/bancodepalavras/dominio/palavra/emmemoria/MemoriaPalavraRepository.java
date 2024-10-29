@@ -98,13 +98,15 @@ public class MemoriaPalavraRepository implements PalavraRepository {
             
             throw new RepositoryException("A palavra não pode ser nula.");
         }
-        
-        if (this.pool.indexOf(palavra) < 0 || this.pool.indexOf(palavra) >= this.pool.size()) {
+
+        Palavra palavraExistente = this.getPorId(palavra.getId());
+
+        if (palavraExistente == null) {
 
             throw new RepositoryException("Não foi possível encontrar a palavra no repositório.");
         }
 
-        this.pool.set((int) palavra.getId(), palavra);  
+        this.pool.set(this.pool.indexOf(palavraExistente), palavra);
     }
 
     @Override
