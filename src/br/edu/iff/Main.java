@@ -21,6 +21,7 @@ public class Main {
     static Aplicacao aplicacao = Aplicacao.getSoleInstance();
 
     public static void main(String[] args) {
+        
         aplicacao.configurar();
 
         PalavraAppService palavraAppService = PalavraAppService.getSoleInstance();
@@ -34,41 +35,51 @@ public class Main {
         String iniciarPartida = scanner.nextLine().trim().toLowerCase();
 
         if (iniciarPartida.equals("s")) {
+
             System.out.print("Digite seu nome: ");
             String nomeJogador = scanner.nextLine();
 
             Jogador jogador = aplicacao.getJogadorFactory().getJogador(nomeJogador);
 
             try {
+
                 aplicacao.getRepositoryFactory().getJogadorRepository().inserir(jogador);
+
             } catch (RepositoryException e) {
-                throw new RuntimeException("Erro ao inserir o jogador: " + e.getMessage());
+
+                System.err.println("Erro ao inserir o jogador: " + e.getMessage());
             }
 
             jogarRodada(jogador);
+
         } else {
+
             System.out.println("Encerrando o jogo. Até a próxima!");
         }
     }
 
 
     private static void jogarRodada(Jogador jogador) {
+
         RodadaAppService rodadaAppService = RodadaAppService.getSoleInstance();
 
         Rodada rodada = rodadaAppService.novaRodada(jogador);
-        System.out.println("Tema das palavras: " + rodada.getTema().getNome());
+
+        System.out.println("\n Tema das palavras: " + rodada.getTema().getNome());
 
         do {
-            System.out.println("Tentativas restantes: " + rodada.getQtdeTentativasRestantes());
-            System.out.print("Tentativas anteriores: ");
+            System.out.println("\nTentativas restantes: " + rodada.getQtdeTentativasRestantes());
+            System.out.println("Tentativas de letras anteriores: ");
 
             for (Letra letraTentativa : rodada.getTentativas()) {
+                
                 letraTentativa.exibir(null);
-                System.out.print(" ");
+                System.out.print(" | ");
             }
 
-            System.out.println("\nPalavra atual: ");
+            System.out.println("\n\n---------Palavras---------\n"); 
             rodada.exibirItens(null);
+            System.out.println("--------------------------");
 
             System.out.println("\nCorpo: ");
             rodada.exibirBoneco(null);
@@ -82,25 +93,25 @@ public class Main {
 
             switch (escolha) {
                 case "1":
-                    System.out.print("Digite a letra: ");
+                    System.out.print("\n Digite a letra: ");
                     rodada.tentar(scanner.next().charAt(0));
                     break;
                 case "2":
                     String[] palavrasArriscadas = new String[rodada.getNumPalavras()];
                     scanner.nextLine();
                     for (int i = 0; i < palavrasArriscadas.length; i++) {
-                        System.out.print("Chute a palavra " + (i + 1) + ": ");
+                        System.out.print("\n Chute a palavra " + (i + 1) + ": ");
                         palavrasArriscadas[i] = scanner.nextLine();
                     }
                     rodada.arriscar(palavrasArriscadas);
                     break;
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("\n Opção inválida!");
                     break;
             }
 
             if (rodada.descobriu()) {
-                System.out.println("Parabéns! Você descobriu!");
+                System.out.println("\n----Parabéns! Você descobriu!----");
                 System.out.println("Pontuação: " + rodada.calcularPontos());
                 break;
             }
@@ -108,7 +119,7 @@ public class Main {
         } while (!rodada.encerrou());
 
         if (!rodada.descobriu()) {
-            System.out.println("Que pena! Você não conseguiu descobrir as palavras.");
+            System.out.println("\n----Que pena! Você não conseguiu descobrir as palavras----");
         }
     }
 
