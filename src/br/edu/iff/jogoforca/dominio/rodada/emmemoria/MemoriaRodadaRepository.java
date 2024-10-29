@@ -14,8 +14,8 @@ import java.util.concurrent.atomic.AtomicLong;
 public class MemoriaRodadaRepository implements RodadaRepository {
 
     private static MemoriaRodadaRepository soleInstance;
-    private Map<Long, Rodada> rodadaPool;
-    private AtomicLong idCounter;
+    private Map<Long, Rodada> pool;
+    private long idCounter;
 
     public static MemoriaRodadaRepository getSoleInstance(){
 
@@ -29,14 +29,14 @@ public class MemoriaRodadaRepository implements RodadaRepository {
 
     private MemoriaRodadaRepository(){
 
-        rodadaPool = new HashMap<>();
-        idCounter = new AtomicLong(0L);
+        pool = new HashMap<>();
+        idCounter = 0;
     }
 
     @Override
     public Rodada getPorId(long id) {
 
-        return rodadaPool.get(id);
+        return pool.get(id);
     } //retorna null se não encontrar
 
     @Override
@@ -44,36 +44,49 @@ public class MemoriaRodadaRepository implements RodadaRepository {
 
         List<Rodada> rodadasDoJogador = new ArrayList<>();
 
-        for (Rodada rodada : rodadaPool.values()) {
+        for (Rodada rodada : pool.values()) {
+
             if (rodada.getJogador().equals(jogador)) {
+
                 rodadasDoJogador.add(rodada);
             }
         }
-
         return rodadasDoJogador.toArray(new Rodada[0]);
     }
 
     @Override
     public void inserir(Rodada rodada) throws RepositoryException {
 
-        rodadaPool.put(rodada.getId(), rodada);
+        if ((pool.put(rodada.getId(), rodada)) == null) {
+
+            throw new RepositoryException("Erro ao inserir a rodada. Chave não foi encontrada.");
+
+        }
     }//
 
     @Override
     public void atualizar(Rodada rodada) throws RepositoryException {
 
-        rodadaPool.replace(rodada.getId(), rodada);
+        if ((pool.replace(rodada.getId(), rodada)) == null){
+
+            throw new RepositoryException("Erro ao atualizar a rodada. Chave não foi encontrada.");
+
+        }
     } //replace retorna null caso a chave não exista
 
     @Override
     public void remover(Rodada rodada) throws RepositoryException {
 
-        rodadaPool.remove(rodada.getId());
+        if(pool.remove(rodada.getId()) == null){
+
+            throw new RepositoryException("Erro ao remover a rodada. Chave não foi encontrada.");
+
+        }
     }
 
     @Override
     public long getProximoId() {
 
-        return idCounter.incrementAndGet();
+        return this.idCounter + 1;
     }
 }

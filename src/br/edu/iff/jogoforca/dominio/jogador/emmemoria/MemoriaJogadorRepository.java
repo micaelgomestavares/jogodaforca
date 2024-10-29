@@ -2,16 +2,19 @@ package br.edu.iff.jogoforca.dominio.jogador.emmemoria;
 
 import br.edu.iff.jogoforca.dominio.jogador.Jogador;
 import br.edu.iff.jogoforca.dominio.jogador.JogadorRepository;
+import br.edu.iff.jogoforca.dominio.rodada.Rodada;
 import br.edu.iff.repository.RepositoryException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MemoriaJogadorRepository implements JogadorRepository {
 
-    private List<Jogador> poolJogador;
+    private Map<Long, Jogador> pool;
     private static MemoriaJogadorRepository soleInstance;
-
+    private long idCounter;
 
     public static MemoriaJogadorRepository getSoleInstance(){
 
@@ -25,26 +28,20 @@ public class MemoriaJogadorRepository implements JogadorRepository {
 
     private MemoriaJogadorRepository() {
 
-        poolJogador = new ArrayList<>();
+        pool = new HashMap<>();
+        idCounter = 0;
     }
 
     @Override
     public Jogador getPorId(long id) {
 
-        for (Jogador jogador : poolJogador){
-
-            if(jogador.getId() == id){
-
-                return jogador;
-            }
-        }
-        return null;
+        return pool.get(id);
     }
 
     @Override
     public Jogador getPorNome(String nome) {
 
-        for (Jogador jogador : poolJogador){
+        for (Jogador jogador : pool.values()){
 
             if(jogador.getNome().equals(nome)){
 
@@ -57,39 +54,37 @@ public class MemoriaJogadorRepository implements JogadorRepository {
     @Override
     public void inserir(Jogador jogador) throws RepositoryException {
 
-        if (poolJogador.contains(jogador)) {
+        if ((pool.put(jogador.getId(), jogador)) == null) {
 
-            throw new RepositoryException();
+            throw new RepositoryException("Erro ao inserir a jogador. Chave não foi encontrada.");
+
         }
-
-        poolJogador.add(jogador);
     }
 
     @Override
     public void atualizar(Jogador jogador) throws RepositoryException {
 
-        int i = poolJogador.indexOf(jogador);
+        if ((pool.replace(jogador.getId(), jogador)) == null){
 
-        if(i != -1){//se tema na lista
-            poolJogador.set(i, jogador); //atualiza o objeto
+            throw new RepositoryException("Erro ao atualizar a jogador. Chave não foi encontrada.");
+
         }
-        else{
-            throw new RepositoryException();
-        }
-    }
+    } //replace retorna null caso a chave não exista
+
 
     @Override
     public void remover(Jogador jogador) throws RepositoryException {
-        int i = poolJogador.indexOf(jogador);
 
-        if(i == -1){
-            throw new RepositoryException();
+        if(pool.remove(jogador.getId()) == null){
+
+            throw new RepositoryException("Erro ao remover a jogador. Chave não foi encontrada.");
+
         }
-        poolJogador.remove(i);
     }
 
     @Override
     public long getProximoId() {
-        return poolJogador.size() + 1;
+
+        return this.idCounter + 1;
     }
 }

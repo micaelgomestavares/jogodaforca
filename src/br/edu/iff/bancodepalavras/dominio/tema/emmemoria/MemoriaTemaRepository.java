@@ -2,20 +2,26 @@ package br.edu.iff.bancodepalavras.dominio.tema.emmemoria;
 
 import br.edu.iff.bancodepalavras.dominio.tema.Tema;
 import br.edu.iff.bancodepalavras.dominio.tema.TemaRepository;
+import br.edu.iff.jogoforca.dominio.jogador.Jogador;
+import br.edu.iff.jogoforca.dominio.rodada.Rodada;
 import br.edu.iff.repository.RepositoryException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MemoriaTemaRepository implements TemaRepository {
 
     private static MemoriaTemaRepository soleInstance;
-    private List<Tema> poolTema;
-
+    Map<Long, Tema> pool;
+    private long idCounter;
 
     private MemoriaTemaRepository() {
-        poolTema = new ArrayList<>();
+
+        pool = new HashMap<>();
+        idCounter = 0;
     }
 
     public static MemoriaTemaRepository getSoleInstance() {
@@ -32,61 +38,66 @@ public class MemoriaTemaRepository implements TemaRepository {
     @Override
     public Tema getPorId(long id) {
 
-        for(Tema tema : poolTema){
-
-            if (tema.getId() == id) {
-
-                return tema;
-            }
-        }
-        //percorrer poolTema comparando o valor do id
-        return null;
+        return pool.get(id);
     }
 
     @Override
     public Tema[] getPorNome(String nome) {
-        List<Tema> temas = new ArrayList<>();
 
-        for(Tema tema : poolTema){
-            if(tema.getNome().equals(nome)){
+        List<Tema> nomesDeTema = new ArrayList<>();
 
-                temas.add(tema);
+        for (Tema tema : pool.values()) {
+
+            if (tema.getNome().equals(nome)) {
+
+                nomesDeTema.add(tema);
             }
         }
-        return temas.toArray(new Tema[0]);
+
+        return nomesDeTema.toArray(new Tema[0]);
     }
 
     @Override
     public Tema[] getTodos() {
         //transformar o pool em array, o proprio metodo ajusta o tamanho
-        return poolTema.toArray(new Tema[0]);
+        return pool.values().toArray(new Tema[0]);
     }
 
     @Override
     public void inserir(Tema tema) throws RepositoryException {// erro aqui, diz que metodos overridem não lançam exceção
 
-        poolTema.add(tema);
+        if ((pool.put(tema.getId(), tema)) == null) {
+
+            throw new RepositoryException("Erro ao inserir a tema. Chave não foi encontrada.");
+
+        }
 
     }
 
     @Override
     public void atualizar(Tema tema) throws RepositoryException {
-        int i = poolTema.indexOf(tema);
 
-        poolTema.set(i, tema); //atualiza o objeto
+        if ((pool.replace(tema.getId(), tema)) == null){
+
+            throw new RepositoryException("Erro ao atualizar a tema. Chave não foi encontrada.");
+
+        }
 
     }
 
     @Override
     public void remover(Tema tema) throws RepositoryException {
-        int i = poolTema.indexOf(tema);
 
-        poolTema.remove(i);
+        if(pool.remove(tema.getId()) == null){
+
+            throw new RepositoryException("Erro ao remover a tema. Chave não foi encontrada.");
+
+        }
     }
 
     @Override
     public long getProximoId() {
 
-        return poolTema.size() + 1; //proximo id disponivel
+        return this.idCounter + 1;
     }
 }
