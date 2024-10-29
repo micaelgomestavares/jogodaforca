@@ -5,7 +5,6 @@ import br.edu.iff.factory.EntityFactory;
 
 public class JogadorFactoryImpl extends EntityFactory implements JogadorFactory {
 
-    private static JogadorRepository jogadorRepository;
     private static JogadorFactoryImpl soleInstance;
 
 
@@ -36,7 +35,8 @@ public class JogadorFactoryImpl extends EntityFactory implements JogadorFactory 
     }
 
     private JogadorRepository getJogadorRepository() {
-        return jogadorRepository;
+
+        return (JogadorRepository) getRepository();
     }
 
     public Jogador getJogador(String nome) {
