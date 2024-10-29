@@ -1,0 +1,3 @@
+animais:gato,cachorro,elefante,leao
+frutas:maca,banana,laranja,melancia
+paises:brasil,argentina,canada,india
