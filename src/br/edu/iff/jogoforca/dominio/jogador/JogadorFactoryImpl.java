@@ -41,7 +41,7 @@ public class JogadorFactoryImpl extends EntityFactory implements JogadorFactory 
 
     public Jogador getJogador(String nome) {
 
-        return Jogador.criar(getProximoId(), nome);
+        return Jogador.criar(getJogadorRepository().getProximoId(), nome);
     }
 
 
