@@ -34,13 +34,16 @@ public class MemoriaPalavraRepository implements PalavraRepository {
     @Override
     public long getProximoId() {
         
-        return (long) this.pool.size();
+        return this.pool.getLast().getId() + 1L;
     }
 
     @Override
     public Palavra getPorId(long id) {
 
-        return this.pool.get((int) id);
+        return this.pool.stream()
+                        .filter(palavra -> palavra.getId() == id)
+                        .findFirst()
+                        .orElse(null);
     }
 
     @Override
