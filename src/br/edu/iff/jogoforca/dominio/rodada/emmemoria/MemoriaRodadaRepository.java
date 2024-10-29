@@ -57,12 +57,14 @@ public class MemoriaRodadaRepository implements RodadaRepository {
     @Override
     public void inserir(Rodada rodada) throws RepositoryException {
 
-        if ((pool.put(rodada.getId(), rodada)) == null) {
+        pool.put(rodada.getId(), rodada);
 
-            throw new RepositoryException("Erro ao inserir a rodada. Chave não foi encontrada.");
+        if (!pool.containsKey(rodada.getId())) {
+
+            throw new RepositoryException("Erro ao inserir a rodada. Rodada não foi adicionada.");
 
         }
-    }//
+    }
 
     @Override
     public void atualizar(Rodada rodada) throws RepositoryException {
@@ -87,6 +89,6 @@ public class MemoriaRodadaRepository implements RodadaRepository {
     @Override
     public long getProximoId() {
 
-        return this.idCounter + 1;
+        return this.idCounter ++;
     }
 }

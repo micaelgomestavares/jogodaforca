@@ -54,9 +54,11 @@ public class MemoriaJogadorRepository implements JogadorRepository {
     @Override
     public void inserir(Jogador jogador) throws RepositoryException {
 
-        if ((pool.put(jogador.getId(), jogador)) == null) {
+        pool.put(jogador.getId(), jogador);
 
-            throw new RepositoryException("Erro ao inserir a jogador. Chave não foi encontrada.");
+        if (!pool.containsKey(jogador.getId())) {
+
+            throw new RepositoryException("Erro ao inserir o jogador. Jogador não foi adicionado.");
 
         }
     }
@@ -85,6 +87,6 @@ public class MemoriaJogadorRepository implements JogadorRepository {
     @Override
     public long getProximoId() {
 
-        return this.idCounter + 1;
+        return this.idCounter ++;
     }
 }

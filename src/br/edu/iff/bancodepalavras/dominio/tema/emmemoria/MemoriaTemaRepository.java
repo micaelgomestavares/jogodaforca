@@ -66,9 +66,11 @@ public class MemoriaTemaRepository implements TemaRepository {
     @Override
     public void inserir(Tema tema) throws RepositoryException {// erro aqui, diz que metodos overridem não lançam exceção
 
-        if ((pool.put(tema.getId(), tema)) == null) {
+        pool.put(tema.getId(), tema);
 
-            throw new RepositoryException("Erro ao inserir a tema. Chave não foi encontrada.");
+        if (!pool.containsKey(tema.getId())) {
+
+            throw new RepositoryException("Erro ao inserir o tema. Tema não foi adicionado.");
 
         }
 
@@ -79,7 +81,7 @@ public class MemoriaTemaRepository implements TemaRepository {
 
         if ((pool.replace(tema.getId(), tema)) == null){
 
-            throw new RepositoryException("Erro ao atualizar a tema. Chave não foi encontrada.");
+            throw new RepositoryException("Erro ao atualizar o tema. Chave não foi encontrada.");
 
         }
 
@@ -90,7 +92,7 @@ public class MemoriaTemaRepository implements TemaRepository {
 
         if(pool.remove(tema.getId()) == null){
 
-            throw new RepositoryException("Erro ao remover a tema. Chave não foi encontrada.");
+            throw new RepositoryException("Erro ao remover o tema. Chave não foi encontrada.");
 
         }
     }
@@ -98,6 +100,6 @@ public class MemoriaTemaRepository implements TemaRepository {
     @Override
     public long getProximoId() {
 
-        return this.idCounter + 1;
+        return this.idCounter ++;
     }
 }
